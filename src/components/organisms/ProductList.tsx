@@ -1,5 +1,5 @@
-import { ProductListItem } from "@/ui/molecules/ProductListItem";
-import { ProductItemType } from "@/ui/types";
+import { ProductListItem } from "@/components/molecules/ProductListItem";
+import { ProductItemType } from "@/components/types";
 
 type ProductListProps = {
 	products: ProductItemType[];

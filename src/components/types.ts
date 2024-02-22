@@ -1,3 +1,5 @@
+import { ProductResponseItem } from "@/api/products";
+
 export type ProductItemType = {
 	id: string;
 	title: string;
@@ -8,3 +10,5 @@ export type ProductItemType = {
 		alt: string;
 	};
 };
+
+export type ProductDetailType = ProductResponseItem;
