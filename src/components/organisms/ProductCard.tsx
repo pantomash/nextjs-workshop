@@ -1,25 +1,24 @@
 import { ProductDetailType } from "@/components/types";
 import { FC } from "react";
-import Image from "next/image";
-import { formatMoney } from "@/utils";
+import { ProductCardDescription } from "@/components/atoms/ProductCardDescription";
+import { ProductCardImage } from "@/components/atoms/ProductCardImage";
 
 type ProductCardProps = {
 	product: ProductDetailType;
 };
 
+// TODO: Add Add to cart button and change img to next/image
+
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
 	return (
-		<div className="flex rounded-lg border border-gray-200 bg-white shadow-sm">
-			<div className="relative h-72 w-52">
-				<Image src={product.image} alt={product.title} layout="fill" objectFit="center" />
-			</div>
-			<div className="w-2/3 p-4">
-				<h1 className="text-lg font-semibold">{product.title}</h1>
-				<div className="text-gray-500">{product.longDescription}</div>
-				<div className="text-lg font-semibold">{formatMoney(product.price)}</div>
-				<div className="text-lg font-semibold">{product.rating.rate}</div>
-				<div className="text-gray-500">{product.category}</div>
-			</div>
+		<div className="mx-auto grid max-w-6xl items-start gap-6 px-4 py-6 md:grid-cols-2 lg:gap-12">
+			<ProductCardDescription
+				category={product.category}
+				description={product.description}
+				price={product.price}
+				title={product.title}
+			/>
+			<ProductCardImage image={product.image} title={product.title} />
 		</div>
 	);
 };
