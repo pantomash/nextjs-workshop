@@ -1,4 +1,4 @@
-import { getProductById, getProductsList } from "@/api/products";
+import { getProductById } from "@/api/products";
 import { ProductCard } from "@/components/organisms/ProductCard";
 import { Metadata } from "next";
 
