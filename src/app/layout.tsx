@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ActiveLink } from "@/components/atoms/ActiveLink";
+import { Footer } from "@/components/atoms/Footer";
+import { Navbar } from "@/components/atoms/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,26 +19,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="pl">
-			<body className={inter.className}>
-				<nav>
-					<ul className="flex justify-center space-x-4">
-						<li>
-							<ActiveLink href="/" label="Home" />
-						</li>
-						<li>
-							<ActiveLink href="/products" label="All" />
-						</li>
-					</ul>
-				</nav>
+			<body>
+				<Navbar />
 				<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
 					{children}
 				</section>
+				<Footer />
 			</body>
-			<footer>
-				<p className="text-center text-sm text-gray-500">
-					© {new Date().getFullYear()} Create Next App
-				</p>
-			</footer>
 		</html>
 	);
 }

@@ -19,7 +19,7 @@ export const ActiveLink: FC<ActiveLinkProps> = ({ href, label }) => {
 		<Link
 			href={href}
 			aria-current={ariaCurrent}
-			className={clsx(`text-blue-400 hover:text-blue-600`, {
+			className={clsx(`text-gray-500 hover:text-gray-900`, {
 				underline: isActive,
 			})}
 		>
