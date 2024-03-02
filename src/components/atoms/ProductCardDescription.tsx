@@ -1,5 +1,5 @@
+import { type FC } from "react";
 import { formatMoney } from "@/utils";
-import { FC } from "react";
 
 type ProductCardDescriptionProps = {
 	category: string;

@@ -1,8 +1,8 @@
 import { ProductListItem } from "@/components/molecules/ProductListItem";
-import { ProductItemType } from "@/components/types";
+import type { ProductListItemFragmentFragment } from "@/gql/graphql";
 
 type ProductListProps = {
-	products: ProductItemType[];
+	products: ProductListItemFragmentFragment[];
 };
 
 export const ProductList = ({ products }: ProductListProps) => {
