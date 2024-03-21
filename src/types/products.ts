@@ -12,3 +12,16 @@ export interface ProductResponseItem {
 		name: string;
 	}[];
 }
+
+export interface PaginatedProductResponse {
+	edges: {
+		node: ProductResponseItem & { slug: string; rating: number };
+	}[];
+	pageInfo: {
+		hasNextPage: boolean;
+		hasPreviousPage: boolean;
+	};
+	aggregate: {
+		count: number;
+	};
+}

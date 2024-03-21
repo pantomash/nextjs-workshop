@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["naszsklep-api.vercel.app"],
+		domains: ["naszsklep-api.vercel.app", "static-ourstore.hyperfunctor.com"],
+	},
+	experimental: {
+		workerThreads: false,
+		cpus: 1,
 	},
 };
 

@@ -8,6 +8,7 @@ fragment ProductListItemFragment on Product {
 		alt
 	}
 	price
+	rating
 	categories {
 		id
 		name

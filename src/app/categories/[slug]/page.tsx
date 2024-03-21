@@ -4,7 +4,10 @@ import { ProductListItem } from "@/components/molecules/ProductListItem";
 import { CategoryGetBySlugDocument } from "@/gql/graphql";
 
 export default async function CategoriesPage({ params }: { params: { slug: string } }) {
-	const { category } = await executeGraphql(CategoryGetBySlugDocument, { slug: params.slug });
+	const { category } = await executeGraphql({
+		query: CategoryGetBySlugDocument,
+		variables: { slug: params.slug },
+	});
 	if (!category) {
 		notFound();
 	}

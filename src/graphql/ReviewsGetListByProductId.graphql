@@ -1,0 +1,9 @@
+query ReviewsGetListByProductId($productId: ID!) {
+	reviews(where: { product: { id: $productId } }, stage: DRAFT) {
+		author
+		description
+		id
+		rating
+		title
+	}
+}

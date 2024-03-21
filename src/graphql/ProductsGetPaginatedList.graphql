@@ -1,0 +1,16 @@
+query ProductsGetPaginatedList($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {
+	productsConnection(first: $first, skip: $skip, orderBy: $orderBy) {
+		edges {
+			node {
+				...ProductListItemFragment
+			}
+		}
+		pageInfo {
+			hasNextPage
+			hasPreviousPage
+		}
+		aggregate {
+			count
+		}
+	}
+}

@@ -1,8 +1,5 @@
-import { getProducts } from "@/api/products";
-import { ProductList } from "@/components/organisms/ProductList";
+import { redirect } from "next/navigation";
 
 export default async function ProductsPage() {
-	const products = await getProducts();
-
-	return <ProductList products={products} />;
+	redirect(`/products/1`);
 }

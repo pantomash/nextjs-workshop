@@ -13,7 +13,11 @@ export const ProductListItem = ({ product }: ProductListItemProps) => {
 			<Link href={`/product/${product.slug}`}>
 				<article>
 					<ProductItemCover src={product.images[0].url} alt={product.images[0].alt} />
-					<ProductItemDescription title={product.name} price={product.price} />
+					<ProductItemDescription
+						title={product.name}
+						price={product.price}
+						rating={product.rating}
+					/>
 				</article>
 			</Link>
 		</li>

@@ -1,22 +1,5 @@
 import { executeGraphql } from "@/api/graphql";
-import { ProductsGetListDocument } from "@/gql/graphql";
-
-// export interface ProductResponseItem {
-// 	id: string;
-// 	title: string;
-// 	price: number;
-// 	description: string;
-// 	category: string;
-// 	// rating: {
-// 	// 	rate: number;
-// 	// 	count: number;
-// 	// };
-// 	image: {
-// 		alt: string;
-// 		url: string;
-// 	};
-// 	// longDescription: string;
-// }
+import { type ProductOrderByInput, ProductsGetPaginatedListDocument } from "@/gql/graphql";
 
 export interface SearchedProduct {
 	name: string;
@@ -25,14 +8,19 @@ export interface SearchedProduct {
 	description: string;
 }
 
-export const getProducts = async () => {
-	const productsGraphqlResponse = await executeGraphql(ProductsGetListDocument);
+export const getProducts = async (first: number, skip: number, sort?: string) => {
+	const variables = sort ? { orderBy: sort } : { orderBy: "id_ASC" };
+	const productsGraphqlResponse = await executeGraphql({
+		query: ProductsGetPaginatedListDocument,
+		variables: {
+			first,
+			skip,
+			orderBy: variables.orderBy as ProductOrderByInput,
+		},
+	});
 
-	return productsGraphqlResponse.products;
+	console.log("productsGraphqlResponse", productsGraphqlResponse);
+	console.log("productsGraphqlResponse.products", productsGraphqlResponse.productsConnection);
+
+	return productsGraphqlResponse.productsConnection;
 };
-
-// export const getProductById = async (id: string) => {
-// 	const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
-// 	const product = (await res.json()) as ProductResponseItem;
-// 	return product;
-// };

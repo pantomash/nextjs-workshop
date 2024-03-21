@@ -1,0 +1,9 @@
+query ReviewsGetList {
+	reviews {
+		author
+		description
+		id
+		rating
+		title
+	}
+}

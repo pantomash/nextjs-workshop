@@ -1,0 +1,13 @@
+query CartGetById($id: ID!) {
+	cart(where: { id: $id }, stage: DRAFT) {
+		id
+		items {
+			id
+			quantity
+			totalPrice
+			product {
+				...ProductListItemFragment
+			}
+		}
+	}
+}

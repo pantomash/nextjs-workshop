@@ -1,0 +1,13 @@
+mutation CartCreate {
+	createCart(data: { total: 0 }) {
+		id
+		items {
+			id
+			quantity
+			totalPrice
+			product {
+				...ProductListItemFragment
+			}
+		}
+	}
+}
