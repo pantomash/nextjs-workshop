@@ -59,7 +59,7 @@ export const ProductList = ({
 									<PaginationLink
 										href={createPaginatedPageUrl(PaginatedRoutes.PRODUCTS, index + 1)}
 										isActive={currentPage === index + 1}
-										className={currentPage === index + 1 ? "pointer-events-none opacity-50" : ""}
+										className={currentPage === index + 1 ? "pacity-50" : ""}
 									>
 										{index + 1}
 									</PaginationLink>
