@@ -115,13 +115,16 @@ export const ReviewForm: FC<ReviewFormProps> = ({ handleOptimisticReview, produc
 						/>
 					</div>
 					<div className="space-y-2">
+						<Input type="email" name="email" />
+					</div>
+					<div className="space-y-2">
 						<FormField
 							control={form.control}
 							name="rating"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Rating</FormLabel>
-									<Select onValueChange={field.onChange} defaultValue="field.value">
+									<Select name="rating" onValueChange={field.onChange} defaultValue="field.value">
 										<FormControl>
 											<SelectTrigger>
 												<SelectValue placeholder="Select a rating" />

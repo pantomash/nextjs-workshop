@@ -3,6 +3,7 @@ export interface ProductResponseItem {
 	name: string;
 	description: string;
 	price: number;
+	rating: number;
 	images: {
 		url: string;
 		alt: string;

@@ -21,18 +21,20 @@ const documents = {
     "mutation CartRemoveItem($itemId: ID!) {\n  deleteCartItem(where: {id: $itemId}) {\n    id\n  }\n}": types.CartRemoveItemDocument,
     "mutation CartSetItemQuantity($cartItemId: ID!, $quantity: Int!) {\n  updateCartItem(where: {id: $cartItemId}, data: {quantity: $quantity}) {\n    id\n  }\n}": types.CartSetItemQuantityDocument,
     "query CategoriesGetList {\n  categories {\n    id\n    name\n    slug\n  }\n}": types.CategoriesGetListDocument,
-    "query CategoryGetBySlug($slug: String!) {\n  category(where: {slug: $slug}) {\n    name\n    products {\n      ...ProductListItemFragment\n    }\n  }\n}": types.CategoryGetBySlugDocument,
+    "query CategoryGetBySlug($slug: String!, $first: Int!, $skip: Int!) {\n  categoriesConnection(first: $first, skip: $skip, where: {slug: $slug}) {\n    edges {\n      node {\n        products {\n          ...ProductListItemFragment\n        }\n        name\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n    }\n    aggregate {\n      count\n    }\n  }\n}": types.CategoryGetBySlugDocument,
+    "query CollectionsGetBySlug($slug: String!) {\n  collections(where: {slug: $slug}) {\n    id\n    name\n    slug\n    products {\n      ...ProductListItemFragment\n    }\n  }\n}": types.CollectionsGetBySlugDocument,
+    "query CollectionsGetList {\n  collections {\n    id\n    slug\n    name\n  }\n}": types.CollectionsGetListDocument,
     "query ProductGetById($id: ID!) {\n  product(where: {id: $id}) {\n    ...ProductListItemFragment\n  }\n}": types.ProductGetByIdDocument,
     "query ProductGetBySlug($slug: String!) {\n  product(where: {slug: $slug}) {\n    ...ProductListItemFragment\n  }\n}": types.ProductGetBySlugDocument,
     "fragment ProductItemFragment on Product {\n  id\n  name\n  description\n  images {\n    url\n    alt\n  }\n  price\n  categories {\n    id\n    name\n  }\n}": types.ProductItemFragmentFragmentDoc,
     "fragment ProductListItemFragment on Product {\n  id\n  slug\n  name\n  description\n  images {\n    url\n    alt\n  }\n  price\n  rating\n  categories {\n    id\n    name\n  }\n}": types.ProductListItemFragmentFragmentDoc,
-    "query ProductsGetList($orderBy: ProductOrderByInput!) {\n  products(orderBy: $orderBy) {\n    ...ProductListItemFragment\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetList {\n  products {\n    ...ProductListItemFragment\n  }\n}": types.ProductsGetListDocument,
     "query ProductsGetPaginatedList($first: Int!, $skip: Int!, $orderBy: ProductOrderByInput!) {\n  productsConnection(first: $first, skip: $skip, orderBy: $orderBy) {\n    edges {\n      node {\n        ...ProductListItemFragment\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n    }\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetPaginatedListDocument,
     "mutation ReviewCreate($author: String!, $description: String!, $productId: ID!, $rating: Int!, $title: String!) {\n  createReview(\n    data: {author: $author, description: $description, product: {connect: {id: $productId}}, rating: $rating, title: $title}\n  ) {\n    author\n    description\n    id\n    rating\n    title\n  }\n}": types.ReviewCreateDocument,
     "mutation ReviewPublish($id: ID!) {\n  publishReview(where: {id: $id}) {\n    id\n  }\n}": types.ReviewPublishDocument,
     "query ReviewsGetList {\n  reviews {\n    author\n    description\n    id\n    rating\n    title\n  }\n}": types.ReviewsGetListDocument,
     "query ReviewsGetListByProductId($productId: ID!) {\n  reviews(where: {product: {id: $productId}}, stage: DRAFT) {\n    author\n    description\n    id\n    rating\n    title\n  }\n}": types.ReviewsGetListByProductIdDocument,
-    "query SearchGetList($query: String!) {\n  products(where: {_search: $query}) {\n    name\n    slug\n    price\n    description\n  }\n}": types.SearchGetListDocument,
+    "query SearchGetList($query: String!) {\n  products(where: {_search: $query}) {\n    ...ProductListItemFragment\n  }\n}": types.SearchGetListDocument,
 };
 
 /**
@@ -66,7 +68,15 @@ export function graphql(source: "query CategoriesGetList {\n  categories {\n    
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query CategoryGetBySlug($slug: String!) {\n  category(where: {slug: $slug}) {\n    name\n    products {\n      ...ProductListItemFragment\n    }\n  }\n}"): typeof import('./graphql').CategoryGetBySlugDocument;
+export function graphql(source: "query CategoryGetBySlug($slug: String!, $first: Int!, $skip: Int!) {\n  categoriesConnection(first: $first, skip: $skip, where: {slug: $slug}) {\n    edges {\n      node {\n        products {\n          ...ProductListItemFragment\n        }\n        name\n      }\n    }\n    pageInfo {\n      hasNextPage\n      hasPreviousPage\n    }\n    aggregate {\n      count\n    }\n  }\n}"): typeof import('./graphql').CategoryGetBySlugDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query CollectionsGetBySlug($slug: String!) {\n  collections(where: {slug: $slug}) {\n    id\n    name\n    slug\n    products {\n      ...ProductListItemFragment\n    }\n  }\n}"): typeof import('./graphql').CollectionsGetBySlugDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query CollectionsGetList {\n  collections {\n    id\n    slug\n    name\n  }\n}"): typeof import('./graphql').CollectionsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -86,7 +96,7 @@ export function graphql(source: "fragment ProductListItemFragment on Product {\n
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($orderBy: ProductOrderByInput!) {\n  products(orderBy: $orderBy) {\n    ...ProductListItemFragment\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetList {\n  products {\n    ...ProductListItemFragment\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -110,7 +120,7 @@ export function graphql(source: "query ReviewsGetListByProductId($productId: ID!
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query SearchGetList($query: String!) {\n  products(where: {_search: $query}) {\n    name\n    slug\n    price\n    description\n  }\n}"): typeof import('./graphql').SearchGetListDocument;
+export function graphql(source: "query SearchGetList($query: String!) {\n  products(where: {_search: $query}) {\n    ...ProductListItemFragment\n  }\n}"): typeof import('./graphql').SearchGetListDocument;
 
 
 export function graphql(source: string) {

@@ -18,10 +18,10 @@ export const publishReview = (id: string) => {
 
 export async function addReviewAction(data: CreateReview) {
 	"use server";
-	console.log("create review", data);
-	const review = await createReview(data);
-	if (review.createReview) {
-		console.log("review", review.createReview);
-	}
+	await createReview(data);
+	// const review = await createReview(data);
+	// if (review.createReview) {
+	// 	console.log("review", review.createReview);
+	// }
 	revalidatePath("singleProduct");
 }

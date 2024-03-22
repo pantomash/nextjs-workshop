@@ -11,6 +11,7 @@ type ProductCardDescriptionProps = {
 	description: string;
 	price: number;
 	title: string;
+	rating: number;
 };
 
 export const ProductCardDescription: FC<ProductCardDescriptionProps> = ({
@@ -19,15 +20,13 @@ export const ProductCardDescription: FC<ProductCardDescriptionProps> = ({
 	description,
 	price,
 	title,
+	rating,
 }) => {
 	async function addProductToCartAction() {
 		"use server";
 		const cart = await getOrCreateCart();
-		console.log("cart ===>", cart);
-		console.log("bjndfkndfk", cart?.id);
 
 		if (cart && cart.items) {
-			console.log("cart.items", cart.items);
 			const productAlreadyExistInCart = cart.items.find(
 				(item) =>
 					(
@@ -57,7 +56,6 @@ export const ProductCardDescription: FC<ProductCardDescriptionProps> = ({
 				return;
 			}
 		}
-		console.log("nakurwiam dalej");
 		await addProductToCart((cart as { id: string }).id, id);
 		revalidateTag("cart");
 	}
@@ -73,7 +71,7 @@ export const ProductCardDescription: FC<ProductCardDescriptionProps> = ({
 				<div>
 					<p>{description}</p>
 				</div>
-				<div className="flex items-center gap-4"></div>
+				<div className="flex items-center gap-4">{rating}</div>
 			</div>
 			<div className="mb-4 text-4xl font-bold">{formatMoney(price)}</div>
 			<AddToCartButton />

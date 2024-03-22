@@ -42,14 +42,11 @@ export const getCartFromCookies = async () => {
 
 export const addProductToCart = async (cartId: string, productId: string) => {
 	"use server";
-	console.log("cartId", cartId);
-	console.log("productId", productId);
 	const { product } = await executeGraphql({
 		query: ProductGetByIdDocument,
 		variables: { id: productId },
 		cache: "no-store",
 	});
-	console.log("product", product);
 	if (!product) throw new Error(`Product with ${productId} not found`);
 
 	await executeGraphql({

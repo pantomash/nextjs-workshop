@@ -5,8 +5,6 @@ import {
 	PaginationContent,
 	PaginationItem,
 	PaginationLink,
-	PaginationNext,
-	PaginationPrevious,
 } from "@/components/ui/pagination";
 import { PaginatedRoutes } from "@/types/pagination";
 import { type PaginatedProductResponse } from "@/types/products";
@@ -26,7 +24,7 @@ export const ProductList = ({
 	return (
 		<section className="flex flex-col gap-y-4">
 			<div className="self-end">
-				<ProductListFilter />
+				<ProductListFilter currentPage={currentPage} />
 			</div>
 			<div>
 				<ul
@@ -41,7 +39,7 @@ export const ProductList = ({
 			<div>
 				<Pagination aria-label="pagination">
 					<PaginationContent>
-						<PaginationItem>
+						{/* <PaginationItem>
 							<PaginationPrevious
 								href={createPaginatedPageUrl(PaginatedRoutes.PRODUCTS, currentPage - 1)}
 								aria-disabled={paginatedProducts.pageInfo.hasPreviousPage ? undefined : true}
@@ -49,10 +47,10 @@ export const ProductList = ({
 								className={
 									paginatedProducts.pageInfo.hasPreviousPage
 										? undefined
-										: "cursor-not-allowed opacity-50 "
+										: "pointer-events-none opacity-50 "
 								}
 							/>
-						</PaginationItem>
+						</PaginationItem> */}
 						{Array.from({
 							length: Math.ceil(paginatedProducts.aggregate.count / elementsPerPage),
 						}).map((_, index) => {
@@ -68,7 +66,7 @@ export const ProductList = ({
 								</PaginationItem>
 							);
 						})}
-						<PaginationItem>
+						{/* <PaginationItem>
 							<PaginationNext
 								href={createPaginatedPageUrl(PaginatedRoutes.PRODUCTS, currentPage + 1)}
 								aria-disabled={paginatedProducts.pageInfo.hasNextPage ? undefined : true}
@@ -76,10 +74,10 @@ export const ProductList = ({
 								className={
 									paginatedProducts.pageInfo.hasNextPage
 										? undefined
-										: "cursor-not-allowed opacity-50"
+										: "pointer-events-none opacity-50"
 								}
 							/>
-						</PaginationItem>
+						</PaginationItem> */}
 					</PaginationContent>
 				</Pagination>
 			</div>

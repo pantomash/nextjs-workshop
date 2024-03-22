@@ -19,8 +19,5 @@ export const getProducts = async (first: number, skip: number, sort?: string) =>
 		},
 	});
 
-	console.log("productsGraphqlResponse", productsGraphqlResponse);
-	console.log("productsGraphqlResponse.products", productsGraphqlResponse.productsConnection);
-
 	return productsGraphqlResponse.productsConnection;
 };

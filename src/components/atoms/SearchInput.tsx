@@ -24,7 +24,7 @@ export const SearchInput: FC = () => {
 
 	return (
 		<div>
-			<Input placeholder="Search" onChange={handleInputChange} />
+			<Input type="search" placeholder="Search" onChange={handleInputChange} />
 		</div>
 	);
 };

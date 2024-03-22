@@ -14,7 +14,7 @@ export const ProductItemDescription = (props: ProductItemDescriptionProps) => {
 			<p data-testid="product-price" className="text-sm font-medium text-gray-900">
 				{formatMoney(price)}
 			</p>
-			<p data-testid="product-price" className="text-sm italic">
+			<p data-testid="product-rating" className="text-sm italic">
 				{Number(rating).toFixed(2)}
 			</p>
 		</div>

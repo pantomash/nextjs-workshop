@@ -2,7 +2,11 @@ import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { executeGraphql } from "@/api/graphql";
 import { ProductCard } from "@/components/organisms/ProductCard";
-import { ProductGetBySlugDocument, ReviewsGetListByProductIdDocument } from "@/gql/graphql";
+import {
+	ProductGetBySlugDocument,
+	ProductsGetPaginatedListDocument,
+	ReviewsGetListByProductIdDocument,
+} from "@/gql/graphql";
 
 export async function generateMetadata({
 	params,
@@ -44,5 +48,17 @@ export default async function ProductDetailsPage({ params }: { params: { slug: s
 		variables: { productId: product.id },
 	});
 
-	return <ProductCard product={product} reviews={reviews} productSlug={params.slug} />;
+	const relatedProducts = await executeGraphql({
+		query: ProductsGetPaginatedListDocument,
+		variables: { first: 4, skip: 0, orderBy: "createdAt_DESC" },
+	});
+
+	return (
+		<ProductCard
+			product={product}
+			reviews={reviews}
+			productSlug={params.slug}
+			relatedProducts={relatedProducts.productsConnection}
+		/>
+	);
 }

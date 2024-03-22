@@ -1,40 +1,55 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
+import { type FC } from "react";
 
-export const ProductListFilter = () => {
+type ProductListFilterProps = {
+	currentPage: number;
+};
+
+export const ProductListFilter: FC<ProductListFilterProps> = ({ currentPage }) => {
 	const router = useRouter();
 
-	const handleChangeValue = (value: string) => {
-		router.push(`/products?sort=${value}`);
+	const handleChangeValue = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		router.push(`/products/${currentPage}?sort=${event.target.value}`);
 	};
 
 	return (
-		<Select onValueChange={handleChangeValue}>
-			<SelectTrigger className="w-[120px]">
-				<SelectValue placeholder="Sort by" />
-			</SelectTrigger>
-			<SelectContent>
-				<SelectItem data-testid="sort-by-price" value="price_ASC">
+		<>
+			<select onChange={handleChangeValue}>
+				<option>none</option>
+				<option data-testid="sort-by-price" value="price_ASC">
 					price asc
-				</SelectItem>
-				<SelectItem data-testid="sort-by-price" value="price_DESC">
+				</option>
+				<option data-testid="sort-by-price" value="price_DESC">
 					price desc
-				</SelectItem>
-				<SelectItem data-testid="sort-by-rating" value="rating_ASC">
+				</option>
+				<option data-testid="sort-by-rating" value="rating_ASC">
 					rating asc
-				</SelectItem>
-				<SelectItem data-testid="sort-by-rating" value="rating_DESC">
+				</option>
+				<option data-testid="sort-by-rating" value="rating_DESC">
 					rating desc
-				</SelectItem>
-			</SelectContent>
-		</Select>
+				</option>
+			</select>
+			{/* <Select onValueChange={handleChangeValue}>
+				<SelectTrigger className="w-[120px]">
+					<SelectValue placeholder="Sort by" />
+				</SelectTrigger>
+				<SelectContent>
+					<SelectItem data-testid="sort-by-price" value="price_ASC">
+						price asc
+					</SelectItem>
+					<SelectItem data-testid="sort-by-price" value="price_DESC">
+						price desc
+					</SelectItem>
+					<SelectItem data-testid="sort-by-rating" value="rating_ASC">
+						rating asc
+					</SelectItem>
+					<SelectItem data-testid="sort-by-rating" value="rating_DESC">
+						rating desc
+					</SelectItem>
+				</SelectContent>
+			</Select> */}
+		</>
 	);
 };

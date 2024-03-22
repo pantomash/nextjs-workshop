@@ -13,8 +13,6 @@ export const IncrementProductQuantity = ({
 		quantity,
 		(_state, newQuantity: number) => newQuantity,
 	);
-	console.log("quantity", quantity);
-	console.log("itemId", itemId);
 
 	return (
 		<form>

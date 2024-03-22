@@ -1,8 +1,19 @@
-query CategoryGetBySlug($slug: String!) {
-	category(where: { slug: $slug }) {
-		name
-		products {
-			...ProductListItemFragment
+query CategoryGetBySlug($slug: String!, $first: Int!, $skip: Int!) {
+	categoriesConnection(first: $first, skip: $skip, where: { slug: $slug }) {
+		edges {
+			node {
+				products {
+					...ProductListItemFragment
+				}
+				name
+			}
+		}
+		pageInfo {
+			hasNextPage
+			hasPreviousPage
+		}
+		aggregate {
+			count
 		}
 	}
 }

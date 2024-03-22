@@ -1,5 +1,5 @@
-query ProductsGetList($orderBy: ProductOrderByInput!) {
-	products(orderBy: $orderBy) {
+query ProductsGetList {
+	products {
 		...ProductListItemFragment
 	}
 }

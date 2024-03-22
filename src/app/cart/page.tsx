@@ -7,7 +7,6 @@ import { RemoveButton } from "@/app/cart/RemoveButton";
 export default async function CartPage() {
 	const cart = (await getCartFromCookies())?.cart;
 	if (!cart) redirect("/");
-	console.log(cart, "cart");
 	return (
 		<div>
 			<h1>Cart</h1>
